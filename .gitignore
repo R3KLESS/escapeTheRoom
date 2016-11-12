@@ -1,0 +1,9 @@
+*/Build
+*/Binaries
+*/DerivedDataCache
+*/Intermediate
+*/Saved
+
+escapeTheRoom/Content/StarterContent/
+*.db
+*.suo
