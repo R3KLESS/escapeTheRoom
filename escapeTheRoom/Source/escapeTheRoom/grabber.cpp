@@ -39,13 +39,38 @@ void Ugrabber::TickComponent( float DeltaTime, ELevelTick TickType, FActorCompon
 	// get the players viewpoint
 	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(playerViewPoint, playerViewPointRotation);
 
-	// raycast out to reach distance
+	// draw a debug line in the world to visualise the grabber reach
+
+	FVector lineTraceEnd = playerViewPoint + playerViewPointRotation.Vector() * grabberReach;
+
+	DrawDebugLine(GetWorld(), playerViewPoint, lineTraceEnd, FColor(255, 0, 0), false, 0.f, 0.f, 10.f);
+	
+	// set up query parameters
+	FCollisionQueryParams traceParameters (FName(TEXT("")), false, GetOwner());
+	 
+	// line trace/raycast out to reach distance
+	FHitResult hit;
+	GetWorld()->LineTraceSingleByObjectType(
+		OUT hit, 
+		playerViewPoint, 
+		lineTraceEnd, 
+		FCollisionObjectQueryParams(ECollisionChannel::ECC_PhysicsBody),
+		traceParameters);
 
 	// see what we hit
+	AActor* actorHit = hit.GetActor();
+	if (actorHit)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("the actor that was hit is %s"), *actorHit->GetName())
+		}
 
-	// log out to test
-	UE_LOG(LogTemp, Warning, TEXT ("players viewpoint is %s , players rotation is %s"), 
-		*playerViewPoint.ToString(), 
-		*playerViewPointRotation.ToString())
+	//// log out to test
+
+	
+
+	//UE_LOG(LogTemp, Warning, TEXT ("players viewpoint is %s , players rotation is %s"), 
+	//	*playerViewPoint.ToString(), 
+	//	*playerViewPointRotation.ToString())
+
 }
 
