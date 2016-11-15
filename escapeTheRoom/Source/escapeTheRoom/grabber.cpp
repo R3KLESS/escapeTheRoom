@@ -24,15 +24,34 @@ void Ugrabber::BeginPlay()
 	Super::BeginPlay();
 
 	// look for attached physics handle
-	physicsHandle = GetOwner()->FindComponentByClass<UPhysicsHandleComponent>();
-	if (physicsHandle)
-	{
+	createdPhysicsHandleComponent = GetOwner()->FindComponentByClass<UPhysicsHandleComponent>();
 
+	if (createdPhysicsHandleComponent)
+	{
+		
+		// physics handle is found do some stuff here
 	}
 	else
 	{
-		
-		UE_LOG(LogTemp, Warning, TEXT(" %s is missing physics handle component, please attach a physics handle component and try again!!"), *GetOwner()->GetName())
+		/* here we are using the NewObject function
+		to create a new physicsHandlerClass for us
+		first we specify the class type in the < > , next it wants the outer object class. 
+		by using the "this" keyword we are saying use the grabber as the outer object,
+		finally TEXT is just giving the newly created physicsHandle a name */
+		createdPhysicsHandleComponent = NewObject<UPhysicsHandleComponent>( this, TEXT("createdPhysicsHandle"));
+
+		if (createdPhysicsHandleComponent)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("physics handle component has been succesfully created!!"))
+
+				// call the registerComponent function which is needed when you dynamically create a component at runtime.
+				createdPhysicsHandleComponent->RegisterComponent();
+		}
+		else
+		{
+			// if we made it this far our code has failed output a backup error so that we can add the physics handle manually
+			UE_LOG(LogTemp, Warning, TEXT(" %s is missing physics handle component, please attach a physics handle component and try again!!"), *GetOwner()->GetName())
+		}
 	}
 	
 }

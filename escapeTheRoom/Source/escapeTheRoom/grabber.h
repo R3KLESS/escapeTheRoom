@@ -26,6 +26,11 @@ private:
 	// how far ahead of the player can the grabber component reach.
 	float grabberReach = 100.f;
 
-	UPhysicsHandleComponent* physicsHandle = nullptr;
+	/* create a new pointer to a physicsHandlerComponent
+	give it the VisibleAnywhere property specifier
+	so that we can edit its properties in the editor.*/
+	UPROPERTY(VisibleAnywhere)
+	UPhysicsHandleComponent* createdPhysicsHandleComponent =nullptr;
+
 		
 };
