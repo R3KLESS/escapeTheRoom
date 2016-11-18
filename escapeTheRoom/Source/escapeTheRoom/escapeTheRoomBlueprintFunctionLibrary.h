@@ -17,4 +17,4 @@ public:
     /**This templated function is not available for use in blueprints but makes for a nice helper in C++**/
     template<typename T>
     FORCEINLINE static T* RequireComponentCast(AActor* IntendedOwner, bool &classFound) { return Cast<T>(RequireComponent(IntendedOwner, T::StaticClass(), classFound)); }
-}
+};
