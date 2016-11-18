@@ -15,14 +15,12 @@ public:
 	// Sets default values for this component's properties
 	Ugrabber();
 
-
-	UFUNCTION(BlueprintCallable, Category = "test")
-		void requireComponent(UClass* testClass, UClass* &chosenClass, bool &classFound);
-
-
-
 	// Called when the game starts
 	virtual void BeginPlay() override;
+
+	/**Overrides from the UObject Base Class**/
+	virtual void PostInitProperties() override;
+	/**End Overrides from the UObject Base Class**/
 	
 	// Called every frame
 	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;	
@@ -34,9 +32,11 @@ private:
 
 	/* create a new pointer to a physicsHandlerComponent
 	give it the VisibleAnywhere property specifier
-	so that we can edit its properties in the editor.*/
-	UPROPERTY(VisibleAnywhere)
-	UPhysicsHandleComponent* createdPhysicsHandleComponent =nullptr;
+	so that we can edit its properties in the editor.
+
+	We are marking this as Transient since the real owner is the Actor that is the Owner of this Component. And we want to fetch this component whenever we load this object - MH**/
+	UPROPERTY(VisibleAnywhere, Transient)
+	UPhysicsHandleComponent* createdPhysicsHandleComponent;
 
 	
 
