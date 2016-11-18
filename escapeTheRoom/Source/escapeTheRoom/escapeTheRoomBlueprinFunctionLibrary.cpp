@@ -24,7 +24,7 @@ UActorComponent* RequireComponent(AActor* IntendedOwner, TSubclassOf<UActorCompo
         	if(NewInstanceComponent)
         	{
 				// Add to SerializedComponents array so it gets saved
-				AddInstanceComponent(NewInstanceComponent);
+				IntendedOwner->AddInstanceComponent(NewInstanceComponent);
                 // Fire off the event that a Component was created
 				NewInstanceComponent->OnComponentCreated();
                 // Register the Component so that it is active in game code
