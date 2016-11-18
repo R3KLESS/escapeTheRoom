@@ -15,11 +15,17 @@ public:
 	// Sets default values for this component's properties
 	Ugrabber();
 
+
+	UFUNCTION(BlueprintCallable, Category = "test")
+		void requireComponent(UClass* testClass, UClass* &chosenClass, bool &classFound);
+
+
+
 	// Called when the game starts
 	virtual void BeginPlay() override;
 	
 	// Called every frame
-	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
+	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;	
 
 private:
 	
@@ -32,5 +38,9 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	UPhysicsHandleComponent* createdPhysicsHandleComponent =nullptr;
 
-		
+	
+
+	//UPROPERTY(EditAnywhere)
+		//UClass* testClass =nullptr;
+
 };
