@@ -4,13 +4,14 @@
 /**
 ** Use TSubclassOf to garauntee that the desired class of the component to construct is actually a UActorComponent child class. Also, it helps Blueprints help you pick the correct UClass type - MH
 **/
-UActorComponent* RequireComponent(AActor* IntendedOwner, TSubclassOf<UActorComponent> testClass, bool &classFound);
+UActorComponent* UescapeTheRoomBlueprintFunctionLibrary::RequireComponent(AActor* IntendedOwner, TSubclassOf<UActorComponent> testClass, bool &classFound)
 {
 	UActorComponent* ResultComponent = nullptr;
 	UClass* ComponentClass = *testClass;
 	if(ComponentClass && IntendedOwner)
 	{
-		if (ResultComponent = IntendedOwner->FindComponentByClass(ComponentClass))
+		ResultComponent = IntendedOwner->FindComponentByClass(ComponentClass);
+		if (ResultComponent)
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Found First Component %s of Class %s in Actor %s"), *ResultComponent->GetName(), *ComponentClass->GetName(), *IntendedOwner->GetName());
 		}

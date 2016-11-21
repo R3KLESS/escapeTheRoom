@@ -1,11 +1,11 @@
 #pragma once
 
 #include "Components/ActorComponent.h"
-#include "BlueprintFunctionLibrary.h"
+#include "Kismet/BlueprintFunctionLibrary.h"
 #include "escapeTheRoomBlueprintFunctionLibrary.generated.h"
 
 UCLASS()
-class UescapeTheRoomBlueprintFunctionLibrary : public UBlueprintFunctionLibrary
+class ESCAPETHEROOM_API UescapeTheRoomBlueprintFunctionLibrary : public UBlueprintFunctionLibrary
 {
     GENERATED_BODY()
     
