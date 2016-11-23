@@ -8,8 +8,8 @@
 
 
 // Sets default values for this component's properties
-Ugrabber::Ugrabber() :
-	createdPhysicsHandleComponent(nullptr)
+Ugrabber::Ugrabber()// :
+//	createdPhysicsHandleComponent(nullptr)
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
@@ -19,20 +19,20 @@ Ugrabber::Ugrabber() :
 	// ...
 }
 
-void Ugrabber::PostInitProperties()
-{
-	Super::PostInitProperties();
-	//This initializes stuff C++ side outside of the constructor but allows us to edit it in the Editor
-	if(createdPhysicsHandleComponent == nullptr)
-	{
-		bool bFound = false;
-		createdPhysicsHandleComponent = UescapeTheRoomBlueprintFunctionLibrary::RequireComponentCast<UPhysicsHandleComponent>(GetOwner(), bFound);
-		if(bFound)
-		{
-			//Do Stuff here;
-		}
-	}
-}
+//void Ugrabber::PostInitProperties()
+//{
+//	Super::PostInitProperties();
+//	//This initializes stuff C++ side outside of the constructor but allows us to edit it in the Editor
+//	if(createdPhysicsHandleComponent == nullptr)
+//	{
+//		bool bFound = false;
+//		createdPhysicsHandleComponent = UescapeTheRoomBlueprintFunctionLibrary::RequireComponentCast<UPhysicsHandleComponent>(GetOwner(), bFound);
+//		if(bFound)
+//		{
+//			//Do Stuff here;
+//		}
+//	}
+//}
 
 // Called when the game starts
 void Ugrabber::BeginPlay()

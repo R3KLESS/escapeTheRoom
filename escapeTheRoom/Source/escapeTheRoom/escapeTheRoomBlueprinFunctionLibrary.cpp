@@ -17,11 +17,19 @@ UActorComponent* UescapeTheRoomBlueprintFunctionLibrary::RequireComponent(AActor
 		}
 		else
 		{
+			int nameIncrement = 1;
+			FString nameIncrementString = FString::FromInt(nameIncrement);
+			
+			FName name = *ComponentClass->GetName();
+			FString nameConcateString = (name.ToString() += nameIncrement);
+			
+				name = (*nameConcateString);
+
 			#if WITH_EDITOR
 			IntendedOwner->Modify();
 			#endif
 		    // Construct the new component and attach as needed
-			UActorComponent* NewInstanceComponent = NewObject<UActorComponent>(IntendedOwner, ComponentClass, TEXT("DynamicComponentInstance"));
+			UActorComponent* NewInstanceComponent = NewObject<UActorComponent>(IntendedOwner, ComponentClass, name);
         	if(NewInstanceComponent)
         	{
 				// Add to SerializedComponents array so it gets saved

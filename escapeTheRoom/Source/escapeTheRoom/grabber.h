@@ -19,7 +19,7 @@ public:
 	virtual void BeginPlay() override;
 
 	/**Overrides from the UObject Base Class**/
-	virtual void PostInitProperties() override;
+	//virtual void PostInitProperties() override;
 	/**End Overrides from the UObject Base Class**/
 	
 	// Called every frame
@@ -35,8 +35,8 @@ private:
 	so that we can edit its properties in the editor.
 
 	We are marking this as Transient since the real owner is the Actor that is the Owner of this Component. And we want to fetch this component whenever we load this object - MH**/
-	UPROPERTY(VisibleAnywhere, Transient)
-	UPhysicsHandleComponent* createdPhysicsHandleComponent;
+//UPROPERTY(VisibleAnywhere, Transient)
+//	UPhysicsHandleComponent* createdPhysicsHandleComponent;
 
 	
 
