@@ -22,8 +22,6 @@ void UopenDoor::BeginPlay()
 	// when the game begins find the pawn that was created in the world
 	actorThatCanOpenDoor = GetWorld()->GetFirstPlayerController()->GetPawn();
 
-	//test DELETE ME
-
 }
 
 // function to open the door in the scene

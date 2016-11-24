@@ -11,11 +11,12 @@ class ESCAPETHEROOM_API UescapeTheRoomBlueprintFunctionLibrary : public UBluepri
     
 public:
     /**Dynamically create a UActorComponent on a given actor during runtime or outside of the constructor.**/
-    UFUNCTION(BlueprintCallable, Category="Actor|ActorComponent")
-    static UActorComponent* RequireComponent(AActor* IntendedOwner, TSubclassOf<UActorComponent> requiredComponentClass, bool &classFound);
+    UFUNCTION(BlueprintCallable, Category="CustomBpNodes|Component")
+    static UActorComponent* RequireComponent(AActor* IntendedComponentOwner,
+		TSubclassOf<UActorComponent> requiredComponentClass);
 
     /**This templated function is not available for use in blueprints but makes for a nice helper in C++**/
     template<typename T>
-    FORCEINLINE static T* RequireComponentCast(AActor* IntendedOwner, bool &classFound) { return Cast<T>(RequireComponent(IntendedOwner, T::StaticClass(), classFound)); }
+    FORCEINLINE static T* RequireComponentCast(AActor* IntendedComponentOwner) { return Cast<T>(RequireComponent(IntendedOwner, T::StaticClass())); }
 
 };
