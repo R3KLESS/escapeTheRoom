@@ -1,35 +1,41 @@
 #include "escapeTheRoom.h"
 #include "escapeTheRoomBlueprintFunctionLibrary.h"
 
+
+int32 nameIndex = 0;
+
 /**
 ** Use TSubclassOf to garauntee that the desired class of the component to construct is actually a UActorComponent child class. Also, it helps Blueprints help you pick the correct UClass type - MH
 **/
-UActorComponent* UescapeTheRoomBlueprintFunctionLibrary::RequireComponent(AActor* IntendedOwner, TSubclassOf<UActorComponent> testClass, bool &classFound)
+UActorComponent* UescapeTheRoomBlueprintFunctionLibrary::RequireComponent(AActor* IntendedOwner, TSubclassOf<UActorComponent> requiredComponentClass, bool &classFound)
 {
 	UActorComponent* ResultComponent = nullptr;
-	UClass* ComponentClass = *testClass;
+	UClass* ComponentClass = *requiredComponentClass;
 	if(ComponentClass && IntendedOwner)
 	{
 		ResultComponent = IntendedOwner->FindComponentByClass(ComponentClass);
-		if (ResultComponent)
+		/*if (ResultComponent)
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Found First Component %s of Class %s in Actor %s"), *ResultComponent->GetName(), *ComponentClass->GetName(), *IntendedOwner->GetName());
 		}
-		else
-		{
-			int nameIncrement = 1;
-			FString nameIncrementString = FString::FromInt(nameIncrement);
-			
+		else 
+		{*/
 			FName name = *ComponentClass->GetName();
-			FString nameConcateString = (name.ToString() += nameIncrement);
 			
-				name = (*nameConcateString);
+			FString nameIncrementString = name.ToString();
+
+			nameIncrementString.Append("_");
+			nameIncrementString.Append(FString::FromInt(nameIndex));
+			
+			FName newCompName = FName(*nameIncrementString);
+
+			nameIndex =nameIndex +1;
 
 			#if WITH_EDITOR
 			IntendedOwner->Modify();
 			#endif
 		    // Construct the new component and attach as needed
-			UActorComponent* NewInstanceComponent = NewObject<UActorComponent>(IntendedOwner, ComponentClass, name);
+			UActorComponent* NewInstanceComponent = NewObject<UActorComponent>(IntendedOwner, ComponentClass, newCompName);
         	if(NewInstanceComponent)
         	{
 				// Add to SerializedComponents array so it gets saved
@@ -48,7 +54,7 @@ UActorComponent* UescapeTheRoomBlueprintFunctionLibrary::RequireComponent(AActor
 				UE_LOG(LogTemp, Log, TEXT("Created required Component %s of type %s on Actor %s"), *ResultComponent->GetName(), *ResultComponent->GetClass()->GetName(), *IntendedOwner->GetName());
 			}
 		}
-	}
+	
 	classFound = ResultComponent != nullptr;
 	return ResultComponent;
 }
