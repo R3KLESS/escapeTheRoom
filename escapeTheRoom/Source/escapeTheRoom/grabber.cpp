@@ -37,6 +37,7 @@ Ugrabber::Ugrabber()// :
 // Called when the game starts
 void Ugrabber::BeginPlay()
 {
+
 	Super::BeginPlay();
 	
 }
